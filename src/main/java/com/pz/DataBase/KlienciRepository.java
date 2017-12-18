@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KlienciRepository extends CrudRepository<Klienci, Long> {
-
     Klienci findKlienciByNrDokumentu(String numerDokumentu);
 }

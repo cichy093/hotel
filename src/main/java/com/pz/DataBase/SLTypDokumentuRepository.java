@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SLTypDokumentuRepository extends CrudRepository<SLTypDokumentu, Long> {
-
     SLTypDokumentu findSLTypDokumentuByNazwa(String nazwa);
 }

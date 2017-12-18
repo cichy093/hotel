@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Getter
 public class SLTypyPokoi {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nazwa;
 
@@ -25,9 +25,4 @@ public class SLTypyPokoi {
     public SLTypyPokoi() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    ;
 }

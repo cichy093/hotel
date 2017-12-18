@@ -46,11 +46,11 @@ public class DataBaseTest {
         long idTypPokojuJedynka = slTypyPokoiRepository.findSLTypyPokoiByNazwa("jedynka").getId();
         long idTypPokojuDwojka = slTypyPokoiRepository.findSLTypyPokoiByNazwa("dwójka").getId();
 
-        this.klienciRepository.save(new Klienci("Jan", "Kowalski", "aaa@test.pl", 555, "22", idTypDokumentuDowod));
-        this.klienciRepository.save(new Klienci("Marek", "Test", "bbb@test.pl", 111, "333", idTypDokumentuPaszport));
+        this.klienciRepository.save(Klienci.builder().imie("Jan").nazwisko("Kowalski").email("aaa@test.pl").telefon(555).nrDokumentu("22")._idTypDokumentu(idTypDokumentuDowod).build());
+        this.klienciRepository.save(Klienci.builder().imie("Marek").nazwisko("Test").email("bbb@test.pl").telefon(111).nrDokumentu("333")._idTypDokumentu(idTypDokumentuPaszport).build());
 
-        this.pokojeRepository.save(new Pokoje(10, idTypPokojuDwojka, false, "Pokoj tesotwy 1"));
-        this.pokojeRepository.save(new Pokoje(20, idTypPokojuJedynka, false, "Pokoj tesotwy 2"));
+        this.pokojeRepository.save(Pokoje.builder().numer(10).idTypPokoju(idTypPokojuDwojka).niedostepny(false).opis("Pokoj tesotwy 1").build());
+        this.pokojeRepository.save(Pokoje.builder().numer(20).idTypPokoju(idTypPokojuJedynka).niedostepny(true).opis("Pokoj tesotwy 2").build());
 
         long idPokoj1 = pokojeRepository.findPokojeByNumer(10).getId();
         long idPokoj2 = pokojeRepository.findPokojeByNumer(20).getId();
@@ -62,8 +62,8 @@ public class DataBaseTest {
         long idMarekTest = klienciRepository.findKlienciByNrDokumentu("333").getId();
 
 
-        this.pokojeRezerwacjeRepository.save(new PokojeRezerwacje(idJanKowalski, idPokoj1, "22.12.2017", "24.12.2017"));
-        this.pokojeRezerwacjeRepository.save(new PokojeRezerwacje(idMarekTest, idPokoj2, "12.07.2017", "22.07.2017"));
+        this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idJanKowalski).idPokoju(idPokoj1).dataOd("22.12.2017").dataDo("24.12.2017").build());
+        this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idMarekTest).idPokoju(idPokoj2).dataOd("12.07.2017").dataDo("22.07.2017").build());
     }
 
     public void printTestData() {

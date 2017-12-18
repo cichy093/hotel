@@ -29,9 +29,4 @@ public class PokojeZdjecia {
     public PokojeZdjecia() {
     }
 
-    public long getIdPokoju() {
-        return idPokoju;
-    }
-
-    ;
 }
