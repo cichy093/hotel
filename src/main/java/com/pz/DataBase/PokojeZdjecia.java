@@ -1,27 +1,37 @@
 package com.pz.DataBase;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-/**
- * Created by Marcin on 05.12.2017.
- */
+
 @Entity
 @Setter
 @Getter
 public class PokojeZdjecia {
 
-    private int idPokoju;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private long idPokoju;
     private String zdjecie; //ścieżka do zdjęcia
 
-    public PokojeZdjecia(int idPokoju, String zdjecie) {
+    public PokojeZdjecia(long idPokoju, String zdjecie) {
         this.idPokoju = idPokoju;
         this.zdjecie = zdjecie;
     }
 
-    //private PokojeZdjecia() {};
+    public PokojeZdjecia() {
+    }
+
+    public long getIdPokoju() {
+        return idPokoju;
+    }
+
+    ;
 }

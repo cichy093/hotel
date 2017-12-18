@@ -2,9 +2,7 @@ package com.pz.DataBase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Created by Marcin on 07.12.2017.
- */
+
 public class DBMenager {
     private static DBMenager ourInstance = new DBMenager();
 

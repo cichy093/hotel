@@ -1,6 +1,5 @@
 package com.pz.DataBase;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * Created by Marcin on 05.12.2017.
- */
 @Entity
 @Setter
 @Getter
@@ -19,16 +15,16 @@ import javax.persistence.Id;
 public class Klienci {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private long id;
 
     private String imie;
     private String nazwisko;
     private String email;
     private int telefon;
     private String nrDokumentu;
-    private int _idTypDokumentu;
+    private long _idTypDokumentu;
 
-    Klienci(String imie, String nazwisko, String email, int telefon, String nrDokumentu, int idTypDokumentu) {
+    Klienci(String imie, String nazwisko, String email, int telefon, String nrDokumentu, long idTypDokumentu) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.email = email;
@@ -36,7 +32,15 @@ public class Klienci {
         this.nrDokumentu = nrDokumentu;
         this._idTypDokumentu = idTypDokumentu;
     }
-    //private Klienci(){};
+
+    public Klienci() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    ;
 
 
 
