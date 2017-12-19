@@ -38,8 +38,8 @@ public class DataBaseTest {
         this.uzytkownicyRepository.deleteAll();
 
 
-        this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("admin").haslo("admin").build());
-        this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("user").haslo("user").build());
+        this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("admin").haslo("admin").czyAdmin(true).build());
+        this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("user").haslo("user").czyAdmin(false).build());
 
         this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("dowód").build());
         this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("paszport").build());

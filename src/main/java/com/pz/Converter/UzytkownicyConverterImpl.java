@@ -12,6 +12,7 @@ public class UzytkownicyConverterImpl implements UzytkownicyConverter {
                 .id(uzytkownicyDto.getId())
                 .nazwaUzytkownika(uzytkownicyDto.getNazwaUzytkownika())
                 .haslo(uzytkownicyDto.getHaslo())
+                .czyAdmin(uzytkownicyDto.isCzyAdmin())
                 .build();
     }
 
@@ -21,6 +22,7 @@ public class UzytkownicyConverterImpl implements UzytkownicyConverter {
                 .id(uzytkownicy.getId())
                 .nazwaUzytkownika(uzytkownicy.getNazwaUzytkownika())
                 .haslo(uzytkownicy.getHaslo())
+                .czyAdmin(uzytkownicy.isCzyAdmin())
                 .build();
     }
 }

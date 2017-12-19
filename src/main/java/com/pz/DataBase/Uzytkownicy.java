@@ -20,4 +20,5 @@ public class Uzytkownicy {
 
     private String nazwaUzytkownika;
     private String haslo;
+    private boolean czyAdmin;
 }

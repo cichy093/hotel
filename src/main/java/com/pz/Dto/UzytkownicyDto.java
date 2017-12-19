@@ -11,4 +11,5 @@ public class UzytkownicyDto {
     private long id;
     private String nazwaUzytkownika;
     private String haslo;
+    private boolean czyAdmin;
 }
