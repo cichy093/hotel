@@ -15,15 +15,17 @@ public class DataBaseTest {
     private PokojeZdjeciaRepository pokojeZdjeciaRepository;
     private SLTypDokumentuRepository slTypDokumentuRepository;
     private SLTypyPokoiRepository slTypyPokoiRepository;
+    private UzytkownicyRepository uzytkownicyRepository;
 
     @Autowired
-    public DataBaseTest(KlienciRepository klienciTabela, PokojeRepository pokojeTabela, PokojeRezerwacjeRepository pokojeRezerwacjeTabela, PokojeZdjeciaRepository pokojeZdjeciaTabela, SLTypDokumentuRepository slTypDokumentuTabela, SLTypyPokoiRepository slTypyPokoiTabela) {
+    public DataBaseTest(KlienciRepository klienciTabela, PokojeRepository pokojeTabela, PokojeRezerwacjeRepository pokojeRezerwacjeTabela, PokojeZdjeciaRepository pokojeZdjeciaTabela, SLTypDokumentuRepository slTypDokumentuTabela, SLTypyPokoiRepository slTypyPokoiTabela, UzytkownicyRepository uzytkownicyRepository) {
         this.klienciRepository = klienciTabela;
         this.pokojeRepository = pokojeTabela;
         this.pokojeRezerwacjeRepository = pokojeRezerwacjeTabela;
         this.pokojeZdjeciaRepository = pokojeZdjeciaTabela;
         this.slTypDokumentuRepository = slTypDokumentuTabela;
         this.slTypyPokoiRepository = slTypyPokoiTabela;
+        this.uzytkownicyRepository = uzytkownicyRepository;
     }
 
     public void loadTestData() {
@@ -33,7 +35,11 @@ public class DataBaseTest {
         this.pokojeZdjeciaRepository.deleteAll();
         this.slTypDokumentuRepository.deleteAll();
         this.slTypyPokoiRepository.deleteAll();
+        this.uzytkownicyRepository.deleteAll();
 
+
+        this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("admin").haslo("admin").build());
+        this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("user").haslo("user").build());
 
         this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("dowód").build());
         this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("paszport").build());
@@ -108,6 +114,13 @@ public class DataBaseTest {
         System.out.println("---------------------------------------");
         for (PokojeZdjecia pokojeZdjecia : this.pokojeZdjeciaRepository.findAll()) {
             System.out.println(pokojeZdjecia);
+        }
+        System.out.println();
+
+        System.out.println("uzytkownicy");
+        System.out.println("---------------------------------------");
+        for (Uzytkownicy uzytkownicy : this.uzytkownicyRepository.findAll()) {
+            System.out.println(uzytkownicy);
         }
         System.out.println();
 
