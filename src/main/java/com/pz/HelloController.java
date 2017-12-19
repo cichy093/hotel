@@ -13,7 +13,6 @@ public class HelloController {
     @Autowired
     public HelloController(DataBaseTest dataBaseTest) {
         this.dataBaseTest = dataBaseTest;
-
     }
 
     @FXML

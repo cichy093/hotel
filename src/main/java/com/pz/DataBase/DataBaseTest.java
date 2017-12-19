@@ -1,6 +1,7 @@
 package com.pz.DataBase;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,11 +35,11 @@ public class DataBaseTest {
         this.slTypyPokoiRepository.deleteAll();
 
 
-        this.slTypDokumentuRepository.save(new SLTypDokumentu("dowód"));
-        this.slTypDokumentuRepository.save(new SLTypDokumentu("paszport"));
+        this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("dowód").build());
+        this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("paszport").build());
 
-        this.slTypyPokoiRepository.save(new SLTypyPokoi("jedynka"));
-        this.slTypyPokoiRepository.save(new SLTypyPokoi("dwójka"));
+        this.slTypyPokoiRepository.save(SLTypyPokoi.builder().nazwa("jedynka").build());
+        this.slTypyPokoiRepository.save(SLTypyPokoi.builder().nazwa("dwójka").build());
 
         long idTypDokumentuPaszport = slTypDokumentuRepository.findSLTypDokumentuByNazwa("paszport").getId();
         long idTypDokumentuDowod = slTypDokumentuRepository.findSLTypDokumentuByNazwa("dowód").getId();
@@ -55,8 +56,8 @@ public class DataBaseTest {
         long idPokoj1 = pokojeRepository.findPokojeByNumer(10).getId();
         long idPokoj2 = pokojeRepository.findPokojeByNumer(20).getId();
 
-        this.pokojeZdjeciaRepository.save(new PokojeZdjecia(idPokoj1, "C://a.jpg"));
-        this.pokojeZdjeciaRepository.save(new PokojeZdjecia(idPokoj2, "C://b.jpg"));
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("C://a.jpg").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj2).zdjecie("C://b.jpg").build());
 
         long idJanKowalski = klienciRepository.findKlienciByNrDokumentu("22").getId();
         long idMarekTest = klienciRepository.findKlienciByNrDokumentu("333").getId();

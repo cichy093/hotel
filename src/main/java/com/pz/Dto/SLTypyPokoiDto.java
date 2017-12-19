@@ -7,9 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SLTypDokumentuDto {
+public class SLTypyPokoiDto {
 
     private long id;
     private String nazwa;
-
 }

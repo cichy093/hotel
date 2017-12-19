@@ -10,6 +10,9 @@ import javax.persistence.Id;
 @Entity
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class SLTypDokumentu {
 
     @Id
@@ -18,10 +21,4 @@ public class SLTypDokumentu {
 
     private String nazwa;
 
-    public SLTypDokumentu(String nazwa) {
-        this.nazwa = nazwa;
-    }
-
-    public SLTypDokumentu() {
-    }
 }
