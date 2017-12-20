@@ -3,7 +3,9 @@ package com.pz.Converter;
 
 import com.pz.DataBase.Uzytkownicy;
 import com.pz.Dto.UzytkownicyDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UzytkownicyConverterImpl implements UzytkownicyConverter {
 
     @Override
