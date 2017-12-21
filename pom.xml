@@ -50,7 +50,7 @@
 			<artifactId>springboot-javafx-support</artifactId>
 			<version>1.4.3</version>
 		</dependency>
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

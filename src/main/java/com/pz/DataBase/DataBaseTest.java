@@ -1,7 +1,8 @@
 package com.pz.DataBase;
 
 
-
+import com.pz.Converter.UzytkownicyConverter;
+import com.pz.Dto.UzytkownicyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,6 @@ public class DataBaseTest {
         this.slTypDokumentuRepository.deleteAll();
         this.slTypyPokoiRepository.deleteAll();
         this.uzytkownicyRepository.deleteAll();
-
 
         this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("admin").haslo("admin").czyAdmin(true).build());
         this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("user").haslo("user").czyAdmin(false).build());
