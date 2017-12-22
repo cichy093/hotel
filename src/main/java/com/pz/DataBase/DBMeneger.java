@@ -1,9 +1,17 @@
 package com.pz.DataBase;
 
+import com.pz.Converter.PokojeConverter;
+import com.pz.Converter.PokojeZdjeciaConverter;
 import com.pz.Converter.UzytkownicyConverter;
+import com.pz.Dto.PokojeDto;
+import com.pz.Dto.PokojeZdjeciaDto;
 import com.pz.Dto.UzytkownicyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public class DBMeneger {
@@ -33,6 +41,12 @@ public class DBMeneger {
     private UzytkownicyConverter uzytkownicyConverter;
     @Autowired
     private DataBaseTest dataBaseTest;
+    @Autowired
+    private PokojeConverter pokojeConverter;
+    @Autowired
+    private PokojeZdjeciaConverter pokojeZdjeciaConverter;
+
+    private PokojeZdjecia pokojeZdjecia;
 
 
     private DBMeneger() {
@@ -57,15 +71,44 @@ public class DBMeneger {
         dataBaseTest.printTestData();
     }
 
-    public Boolean isUser(UzytkownicyDto uzytkownicyDto) {
-        Boolean isUser = false;
+    public Boolean isAdmin(UzytkownicyDto uzytkownicyDto) {
+        Boolean isAdmin = false;
+        Long idUser = this.uzytkownicyRepository.findUzytkownicyByNazwaUzytkownikaAndHaslo(uzytkownicyDto.getNazwaUzytkownika(), uzytkownicyDto.getHaslo()).getId();
         try {
-            if (this.uzytkownicyRepository.exists(this.uzytkownicyRepository.findUzytkownicyByNazwaUzytkownikaAndHaslo(uzytkownicyDto.getNazwaUzytkownika(), uzytkownicyDto.getHaslo()).getId())) {
-                isUser = true;
+            if (this.uzytkownicyRepository.exists(idUser) && this.uzytkownicyRepository.findOne(idUser).isCzyAdmin()) {
+                isAdmin = true;
             }
         } catch (Exception ex) {
-            isUser = false;
+            isAdmin = false;
         }
-        return isUser;
+        return isAdmin;
+    }
+
+    public List<PokojeDto> getListOfRooms() {
+        List<PokojeDto> listOfRoomsDto = new ArrayList<>();
+        List<Pokoje> listOfRooms = (List<Pokoje>) this.pokojeRepository.findAll();
+        for (Pokoje room : listOfRooms) {
+            listOfRoomsDto.add(this.pokojeConverter.convertToDto(room));
+        }
+        return listOfRoomsDto;
+    }
+
+    public List<PokojeZdjeciaDto> getListRoomsPhoto(){
+        List<PokojeZdjeciaDto> listOfRoomsPhotoDto = new ArrayList<>();
+        List<PokojeZdjecia> listOfRoomsPhoto = (List<PokojeZdjecia>) this.pokojeZdjeciaRepository.findAll();
+        for (PokojeZdjecia roomPhoto : listOfRoomsPhoto) {
+            listOfRoomsPhotoDto.add(this.pokojeZdjeciaConverter.convertToDto(roomPhoto));
+        }
+        return listOfRoomsPhotoDto;
+    }
+
+    public List<String> getListOfRoomPhotos(Long id, List<PokojeZdjeciaDto> pokojeZdjeciaDto){
+        List<String> listOfRoomPhotos = new ArrayList<>();
+        for (PokojeZdjeciaDto roomPhoto : pokojeZdjeciaDto) {
+            if (roomPhoto.getIdPokoju() == id){
+                listOfRoomPhotos.add(roomPhoto.getZdjecie());
+            }
+        }
+        return listOfRoomPhotos;
     }
 }

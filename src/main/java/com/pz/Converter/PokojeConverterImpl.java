@@ -9,6 +9,7 @@ public class PokojeConverterImpl implements PokojeConverter {
     @Override
     public Pokoje convertToEntity(PokojeDto pokojeDto) {
         return Pokoje.builder()
+                .id(pokojeDto.getId())
                 .numer(pokojeDto.getNumer())
                 .idTypPokoju(pokojeDto.getIdTypPokoju())
                 .niedostepny(pokojeDto.isNiedostepny())
@@ -19,6 +20,7 @@ public class PokojeConverterImpl implements PokojeConverter {
     @Override
     public PokojeDto convertToDto(Pokoje pokoje) {
         return PokojeDto.builder()
+                .id(pokoje.getId())
                 .numer(pokoje.getNumer())
                 .idTypPokoju(pokoje.getIdTypPokoju())
                 .niedostepny(pokoje.isNiedostepny())

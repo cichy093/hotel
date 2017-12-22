@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PokojeZdjeciaRepository extends CrudRepository<PokojeZdjecia, Long> {
+    PokojeZdjecia findPokojeZdjeciaByidPokoju(Long id);
 }

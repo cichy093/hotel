@@ -47,11 +47,11 @@ public class DataBaseTest {
         this.slTypyPokoiRepository.save(SLTypyPokoi.builder().nazwa("jedynka").build());
         this.slTypyPokoiRepository.save(SLTypyPokoi.builder().nazwa("dwójka").build());
 
-        long idTypDokumentuPaszport = slTypDokumentuRepository.findSLTypDokumentuByNazwa("paszport").getId();
-        long idTypDokumentuDowod = slTypDokumentuRepository.findSLTypDokumentuByNazwa("dowód").getId();
+        long idTypDokumentuPaszport = this.slTypDokumentuRepository.findSLTypDokumentuByNazwa("paszport").getId();
+        long idTypDokumentuDowod = this.slTypDokumentuRepository.findSLTypDokumentuByNazwa("dowód").getId();
 
-        long idTypPokojuJedynka = slTypyPokoiRepository.findSLTypyPokoiByNazwa("jedynka").getId();
-        long idTypPokojuDwojka = slTypyPokoiRepository.findSLTypyPokoiByNazwa("dwójka").getId();
+        long idTypPokojuJedynka = this.slTypyPokoiRepository.findSLTypyPokoiByNazwa("jedynka").getId();
+        long idTypPokojuDwojka = this.slTypyPokoiRepository.findSLTypyPokoiByNazwa("dwójka").getId();
 
         this.klienciRepository.save(Klienci.builder().imie("Jan").nazwisko("Kowalski").email("aaa@test.pl").telefon(555).nrDokumentu("22")._idTypDokumentu(idTypDokumentuDowod).build());
         this.klienciRepository.save(Klienci.builder().imie("Marek").nazwisko("Test").email("bbb@test.pl").telefon(111).nrDokumentu("333")._idTypDokumentu(idTypDokumentuPaszport).build());
@@ -59,14 +59,15 @@ public class DataBaseTest {
         this.pokojeRepository.save(Pokoje.builder().numer(10).idTypPokoju(idTypPokojuDwojka).niedostepny(false).opis("Pokoj tesotwy 1").build());
         this.pokojeRepository.save(Pokoje.builder().numer(20).idTypPokoju(idTypPokojuJedynka).niedostepny(true).opis("Pokoj tesotwy 2").build());
 
-        long idPokoj1 = pokojeRepository.findPokojeByNumer(10).getId();
-        long idPokoj2 = pokojeRepository.findPokojeByNumer(20).getId();
+        long idPokoj1 = this.pokojeRepository.findPokojeByNumer(10).getId();
+        long idPokoj2 = this.pokojeRepository.findPokojeByNumer(20).getId();
 
-        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("C://a.jpg").build());
-        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj2).zdjecie("C://b.jpg").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/Circuit.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj2).zdjecie("/images/Circuit.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/nebula_artwork_4k-5120x2880.png").build());
 
-        long idJanKowalski = klienciRepository.findKlienciByNrDokumentu("22").getId();
-        long idMarekTest = klienciRepository.findKlienciByNrDokumentu("333").getId();
+        long idJanKowalski = this.klienciRepository.findKlienciByNrDokumentu("22").getId();
+        long idMarekTest = this.klienciRepository.findKlienciByNrDokumentu("333").getId();
 
 
         this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idJanKowalski).idPokoju(idPokoj1).dataOd("22.12.2017").dataDo("24.12.2017").build());
@@ -98,7 +99,7 @@ public class DataBaseTest {
         System.out.println("Pokoje");
         System.out.println("---------------------------------------");
         for (Pokoje pokoje : this.pokojeRepository.findAll()) {
-            System.out.println(pokoje);
+            System.out.println(pokoje.getId());
         }
         System.out.println();
 
@@ -113,7 +114,7 @@ public class DataBaseTest {
         System.out.println("pokoje zdjecia");
         System.out.println("---------------------------------------");
         for (PokojeZdjecia pokojeZdjecia : this.pokojeZdjeciaRepository.findAll()) {
-            System.out.println(pokojeZdjecia);
+            System.out.println(pokojeZdjecia.getIdPokoju());
         }
         System.out.println();
 

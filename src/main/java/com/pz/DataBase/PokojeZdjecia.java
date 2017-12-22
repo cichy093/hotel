@@ -1,5 +1,6 @@
 package com.pz.DataBase;
 
+
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -21,5 +22,5 @@ public class PokojeZdjecia {
     private long id;
 
     private long idPokoju;
-    private String zdjecie; //ścieżka do zdjęcia
+    private String zdjecie;
 }

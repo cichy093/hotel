@@ -15,6 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pokoje {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
