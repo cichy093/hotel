@@ -41,14 +41,14 @@ public class DataBaseTest {
         this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("admin").haslo("admin").czyAdmin(true).build());
         this.uzytkownicyRepository.save(Uzytkownicy.builder().nazwaUzytkownika("user").haslo("user").czyAdmin(false).build());
 
-        this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("dowód").build());
-        this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("paszport").build());
+        this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("Dowód osobisty").build());
+        this.slTypDokumentuRepository.save(SLTypDokumentu.builder().nazwa("Paszport").build());
 
         this.slTypyPokoiRepository.save(SLTypyPokoi.builder().nazwa("jedynka").build());
         this.slTypyPokoiRepository.save(SLTypyPokoi.builder().nazwa("dwójka").build());
 
-        long idTypDokumentuPaszport = this.slTypDokumentuRepository.findSLTypDokumentuByNazwa("paszport").getId();
-        long idTypDokumentuDowod = this.slTypDokumentuRepository.findSLTypDokumentuByNazwa("dowód").getId();
+        long idTypDokumentuPaszport = this.slTypDokumentuRepository.findSLTypDokumentuByNazwa("Paszport").getId();
+        long idTypDokumentuDowod = this.slTypDokumentuRepository.findSLTypDokumentuByNazwa("Dowód osobisty").getId();
 
         long idTypPokojuJedynka = this.slTypyPokoiRepository.findSLTypyPokoiByNazwa("jedynka").getId();
         long idTypPokojuDwojka = this.slTypyPokoiRepository.findSLTypyPokoiByNazwa("dwójka").getId();
@@ -64,7 +64,11 @@ public class DataBaseTest {
 
         this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/Circuit.png").build());
         this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj2).zdjecie("/images/Circuit.png").build());
-        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/nebula_artwork_4k-5120x2880.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/nebula.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/nebula.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/Circuit.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/nebula.png").build());
+        this.pokojeZdjeciaRepository.save(PokojeZdjecia.builder().idPokoju(idPokoj1).zdjecie("/images/Circuit.png").build());
 
         long idJanKowalski = this.klienciRepository.findKlienciByNrDokumentu("22").getId();
         long idMarekTest = this.klienciRepository.findKlienciByNrDokumentu("333").getId();
@@ -106,7 +110,10 @@ public class DataBaseTest {
         System.out.println("pokoje rezerwacje");
         System.out.println("---------------------------------------");
         for (PokojeRezerwacje pokojeRezerwacje : this.pokojeRezerwacjeRepository.findAll()) {
-            System.out.println(pokojeRezerwacje);
+            System.out.println(pokojeRezerwacje.getDataOd());
+            System.out.println(pokojeRezerwacje.getDataDo());
+            System.out.println(pokojeRezerwacje.getIdPokoju());
+            System.out.println(pokojeRezerwacje.getIdKlienta());
         }
         System.out.println();
 

@@ -1,11 +1,8 @@
 package com.pz.DataBase;
 
-import com.pz.Converter.PokojeConverter;
-import com.pz.Converter.PokojeZdjeciaConverter;
-import com.pz.Converter.UzytkownicyConverter;
-import com.pz.Dto.PokojeDto;
-import com.pz.Dto.PokojeZdjeciaDto;
-import com.pz.Dto.UzytkownicyDto;
+import com.pz.Converter.*;
+import com.pz.Dto.*;
+import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,6 +42,10 @@ public class DBMeneger {
     private PokojeConverter pokojeConverter;
     @Autowired
     private PokojeZdjeciaConverter pokojeZdjeciaConverter;
+    @Autowired
+    private KlienciConverter klienciConverter;
+    @Autowired
+    private PokojeRezerwacjeConverter pokojeRezerwacjeConverter;
 
     private PokojeZdjecia pokojeZdjecia;
 
@@ -110,5 +111,29 @@ public class DBMeneger {
             }
         }
         return listOfRoomPhotos;
+    }
+
+    public int getRoomNumber(Long idPokoju){
+        int nrPokoju = pokojeRepository.findOne(idPokoju).getNumer();
+        return nrPokoju;
+    }
+    public PokojeDto getRoom(Long idPokoju){
+        PokojeDto room = this.pokojeConverter.convertToDto(this.pokojeRepository.findOne(idPokoju));
+        return room;
+    }
+    public void roomAccessibility(Long idPokoju, Boolean access){
+        this.pokojeRepository.findOne(idPokoju).setNiedostepny(access);
+    }
+    public Long idDocType(String docType){
+        return this.slTypDokumentuRepository.findSLTypDokumentuByNazwa(docType).getId();
+    }
+    public void newCustomer(KlienciDto klienciDto){
+        this.klienciRepository.save(this.klienciConverter.convertToEntity(klienciDto));
+    }
+    public Long getIdCustomer(String docNmb){
+        return this.klienciRepository.findKlienciByNrDokumentu(docNmb).getId();
+    }
+    public void newReservation(PokojeRezerwacjeDto pokojeRezerwacjeDto){
+        this.pokojeRezerwacjeRepository.save(this.pokojeRezerwacjeConverter.convertToEntity(pokojeRezerwacjeDto));
     }
 }

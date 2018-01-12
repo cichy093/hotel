@@ -8,10 +8,12 @@ import de.felixroske.jfxsupport.FXMLController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +33,13 @@ public class MainWindowController {
 
     private List<PokojeZdjeciaDto> listOfRoomsPhoto;
 
-    private List<String> listOfRoomPhotos;
+
+    @Autowired
+    DetailsWindowController detailsWindowController;
 
     @FXML
     private GridPane gpRoomList;
+
 
     public void setCzyZalogowanyAdmin(Boolean czyZalogowanyAdmin) {
         this.czyZalogowanyAdmin = czyZalogowanyAdmin;
@@ -66,8 +71,14 @@ public class MainWindowController {
                 roomNmb = String.valueOf(listOfRooms.get(i).getNumer());
                 lbRoomDesc = new Label("Pokój numer: " + roomNmb);
                 details = new Button("Szczegóły");
+                details.setId(Long.toString(listOfRooms.get(i).getId()));
+                final Long idPokoju = Long.parseLong(details.getId());
                 details.setOnAction(event -> {
-                    HotelApplication.showView(HelloView.class);
+                    HotelApplication.showView(DetailsWindowView.class);
+                    detailsWindowController.setIdPokoju(idPokoju);
+                    detailsWindowController.loadWindow();
+                    if (czyZalogowanyAdmin == true) detailsWindowController.logInAdmin();
+                    else detailsWindowController.logOutAdmin();
                 });
                 Image image = new Image(getClass().getResource(roomPhotos.get(0)).toExternalForm());
                 roomImage = new ImageView(image);
@@ -77,7 +88,7 @@ public class MainWindowController {
                 this.gpRoomList.getRowConstraints().add(rowConstraints);
                 this.gpRoomList.add(lbRoomDesc, 0, i);
                 this.gpRoomList.add(roomImage, 1, i);
-                this.gpRoomList.add(details, 2, i);
+                this.gpRoomList.add(details, 2, i,10,10);
             }
         }
     }

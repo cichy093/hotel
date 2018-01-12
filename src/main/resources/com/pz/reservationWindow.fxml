@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pz.ReservationWindowController">
+   <children>
+      <Label layoutX="36.0" layoutY="29.0" text="Rezerwacja" />
+      <Label layoutX="36.0" layoutY="78.0" text="Imię" />
+      <Label layoutX="33.0" layoutY="115.0" text="Nazwisko" />
+      <Label layoutX="33.0" layoutY="153.0" text="E-mail" />
+      <Label layoutX="33.0" layoutY="192.0" text="Telefon" />
+      <Label layoutX="33.0" layoutY="224.0" text="Nr Dokumentu" />
+      <Label layoutX="33.0" layoutY="260.0" text="Data od:" />
+      <Label layoutX="33.0" layoutY="298.0" text="Data do:" />
+      <Button layoutX="27.0" layoutY="361.0" mnemonicParsing="false" text="Wróć" onAction="#goBack" />
+      <Button layoutX="451.0" layoutY="361.0" mnemonicParsing="false" text="Zapisz" onAction="#save" />
+      <TextField fx:id="txbEmail" layoutX="151.0" layoutY="149.0" />
+      <TextField fx:id="txbName" layoutX="151.0" layoutY="74.0" />
+      <TextField fx:id="txbSurname" layoutX="151.0" layoutY="111.0" />
+      <TextField fx:id="txbTelNmb" layoutX="151.0" layoutY="188.0" />
+      <TextField fx:id="txbDocNmb" layoutX="151.0" layoutY="220.0" />
+      <DatePicker fx:id="dtpDateFrom" layoutX="151.0" layoutY="256.0" />
+      <DatePicker fx:id="dtpDateTo" layoutX="151.0" layoutY="294.0" />
+      <Label layoutX="325.0" layoutY="224.0" text="Typ dokumentu" />
+      <ChoiceBox fx:id="cbIdDoc" layoutX="425.0" layoutY="220.0" prefWidth="150.0" />
+   </children>
+</Pane>

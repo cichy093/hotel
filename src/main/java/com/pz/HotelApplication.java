@@ -12,8 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class HotelApplication extends AbstractJavaFxApplicationSupport {
 
     public static void main(String[] args) {
-		launchApp(HotelApplication.class, HelloView.class, args);
-	}
+        launchApp(HotelApplication.class, HelloView.class, args);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
