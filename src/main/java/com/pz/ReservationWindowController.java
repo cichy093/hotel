@@ -48,6 +48,9 @@ public class ReservationWindowController {
     @Autowired
     DBMeneger dbMeneger = DBMeneger.getInstance();
 
+    @Autowired
+    private DetailsWindowController detailsWindowController;
+
     private PokojeRezerwacjeDto pokojeRezerwacjeDto;
     private KlienciDto klienciDto;
     private SLTypDokumentuDto slTypDokumentuDto;
@@ -69,19 +72,16 @@ public class ReservationWindowController {
             String docType = cbIdDoc.getValue().toString();
             klienciDto.set_idTypDokumentu(dbMeneger.idDocType(docType));
             this.dbMeneger.newCustomer(klienciDto);
-
             pokojeRezerwacjeDto.setIdKlienta(dbMeneger.getIdCustomer(klienciDto.getNrDokumentu()));
             pokojeRezerwacjeDto.setIdPokoju(idPokoju);
             pokojeRezerwacjeDto.setDataOd(dtpDateFrom.getValue().toString());
             pokojeRezerwacjeDto.setDataDo(dtpDateTo.getValue().toString());
             this.dbMeneger.newReservation(pokojeRezerwacjeDto);
-            //this.dbMeneger.printTestData();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Sukces");
             alert.setHeaderText("Zarezerwowano termin");
             alert.show();
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Błąd");
             alert.setHeaderText("Rezerwacja nie została dokonana, spróbuj ponownie");
@@ -96,8 +96,8 @@ public class ReservationWindowController {
         txbEmail.clear();
         txbSurname.clear();
         txbTelNmb.clear();
-        
         dtpDateFrom.setValue(null);
         dtpDateTo.setValue(null);
+        detailsWindowController.loadWindow();
     }
 }

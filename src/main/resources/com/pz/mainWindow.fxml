@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pz.MainWindowController">
    <children>
-      <Button fx:id="btnLogAsAdmin" layoutX="450.0" layoutY="14.0" mnemonicParsing="false" onAction="#logIn" text="Zaloguj administratora" />
+      <Button fx:id="btnLogAsAdmin" layoutX="413.0" layoutY="14.0" mnemonicParsing="false" onAction="#logIn" text="Zaloguj administratora" />
        <Label layoutX="55.0" layoutY="31.0" text="Dostępne pokoje:">
          <font>
             <Font size="24.0" />
@@ -24,5 +24,6 @@
                   </GridPane>
         </content>
       </ScrollPane>
+      <Button fx:id="btnLogOut" layoutX="325.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" text="Wyloguj" />
    </children>
 </Pane>

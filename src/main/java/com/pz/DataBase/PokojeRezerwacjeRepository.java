@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PokojeRezerwacjeRepository extends CrudRepository<PokojeRezerwacje, Long> {
+    PokojeRezerwacje findPokojeRezerwacjeByIdPokoju(Long id);
 }

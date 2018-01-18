@@ -39,6 +39,7 @@ public class LoginWindowController {
             if (dbMeneger.isAdmin(uzytkownicyDto)) {
                 mainWindowController.setCzyZalogowanyAdmin(true);
                 HotelApplication.showView(MainWindowView.class);
+                mainWindowController.loadWindow();
             } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Błędne dane");

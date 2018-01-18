@@ -5,6 +5,7 @@ import com.pz.DataBase.PokojeZdjecia;
 import com.pz.Dto.PokojeDto;
 import com.pz.Dto.PokojeZdjeciaDto;
 import de.felixroske.jfxsupport.FXMLController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +25,11 @@ import java.util.List;
 @FXMLController
 public class MainWindowController {
 
+    @FXML
+    private Button btnLogOut;
+    @FXML
+    private Button btnLogAsAdmin;
+
     @Autowired
     DBMeneger dbMeneger = DBMeneger.getInstance();
 
@@ -33,6 +39,7 @@ public class MainWindowController {
 
     private List<PokojeZdjeciaDto> listOfRoomsPhoto;
 
+    private int czyPworot = 0;
 
     @Autowired
     DetailsWindowController detailsWindowController;
@@ -40,6 +47,9 @@ public class MainWindowController {
     @FXML
     private GridPane gpRoomList;
 
+    public void setCzyPworot(int czyPworot) {
+        this.czyPworot = czyPworot;
+    }
 
     public void setCzyZalogowanyAdmin(Boolean czyZalogowanyAdmin) {
         this.czyZalogowanyAdmin = czyZalogowanyAdmin;
@@ -57,6 +67,11 @@ public class MainWindowController {
 
 
     public void loadGrid() {
+        if (czyPworot != 0) {
+            this.gpRoomList.getRowConstraints().clear();
+            this.listOfRooms.clear();
+            this.listOfRoomsPhoto.clear();
+        }
         this.listOfRooms = this.dbMeneger.getListOfRooms();
         this.listOfRoomsPhoto = this.dbMeneger.getListRoomsPhoto();
         List<String> roomPhotos;
@@ -88,8 +103,26 @@ public class MainWindowController {
                 this.gpRoomList.getRowConstraints().add(rowConstraints);
                 this.gpRoomList.add(lbRoomDesc, 0, i);
                 this.gpRoomList.add(roomImage, 1, i);
-                this.gpRoomList.add(details, 2, i,10,10);
+                this.gpRoomList.add(details, 2, i);
             }
         }
+    }
+
+    public void loadWindow(){
+        if (czyZalogowanyAdmin == true){
+            btnLogOut.setVisible(true);
+            btnLogAsAdmin.setText("Zalogowano jako Administrator");
+            btnLogAsAdmin.setDisable(true);
+        }
+        else {
+            btnLogOut.setVisible(false);
+        }
+
+        loadGrid();
+    }
+
+    public void logOut() {
+        setCzyZalogowanyAdmin(false);
+        btnLogAsAdmin.setDisable(false);
     }
 }

@@ -94,7 +94,7 @@ public class DBMeneger {
         return listOfRoomsDto;
     }
 
-    public List<PokojeZdjeciaDto> getListRoomsPhoto(){
+    public List<PokojeZdjeciaDto> getListRoomsPhoto() {
         List<PokojeZdjeciaDto> listOfRoomsPhotoDto = new ArrayList<>();
         List<PokojeZdjecia> listOfRoomsPhoto = (List<PokojeZdjecia>) this.pokojeZdjeciaRepository.findAll();
         for (PokojeZdjecia roomPhoto : listOfRoomsPhoto) {
@@ -103,37 +103,66 @@ public class DBMeneger {
         return listOfRoomsPhotoDto;
     }
 
-    public List<String> getListOfRoomPhotos(Long id, List<PokojeZdjeciaDto> pokojeZdjeciaDto){
+    public List<String> getListOfRoomPhotos(Long id, List<PokojeZdjeciaDto> pokojeZdjeciaDto) {
         List<String> listOfRoomPhotos = new ArrayList<>();
         for (PokojeZdjeciaDto roomPhoto : pokojeZdjeciaDto) {
-            if (roomPhoto.getIdPokoju() == id){
+            if (roomPhoto.getIdPokoju() == id) {
                 listOfRoomPhotos.add(roomPhoto.getZdjecie());
             }
         }
         return listOfRoomPhotos;
     }
 
-    public int getRoomNumber(Long idPokoju){
+    public int getRoomNumber(Long idPokoju) {
         int nrPokoju = pokojeRepository.findOne(idPokoju).getNumer();
         return nrPokoju;
     }
-    public PokojeDto getRoom(Long idPokoju){
+
+    public PokojeDto getRoom(Long idPokoju) {
         PokojeDto room = this.pokojeConverter.convertToDto(this.pokojeRepository.findOne(idPokoju));
         return room;
     }
-    public void roomAccessibility(Long idPokoju, Boolean access){
+
+    public void roomAccessibility(Long idPokoju, Boolean access) {
         this.pokojeRepository.findOne(idPokoju).setNiedostepny(access);
     }
-    public Long idDocType(String docType){
+
+    public Long idDocType(String docType) {
         return this.slTypDokumentuRepository.findSLTypDokumentuByNazwa(docType).getId();
     }
-    public void newCustomer(KlienciDto klienciDto){
+
+    public void newCustomer(KlienciDto klienciDto) {
         this.klienciRepository.save(this.klienciConverter.convertToEntity(klienciDto));
     }
-    public Long getIdCustomer(String docNmb){
+
+    public Long getIdCustomer(String docNmb) {
         return this.klienciRepository.findKlienciByNrDokumentu(docNmb).getId();
     }
-    public void newReservation(PokojeRezerwacjeDto pokojeRezerwacjeDto){
+
+    public void newReservation(PokojeRezerwacjeDto pokojeRezerwacjeDto) {
         this.pokojeRezerwacjeRepository.save(this.pokojeRezerwacjeConverter.convertToEntity(pokojeRezerwacjeDto));
+    }
+
+    public void changeRoomAvailable(PokojeDto pokojeDto) {
+        this.pokojeRepository.save(this.pokojeConverter.convertToEntity(pokojeDto));
+    }
+
+    public List<String> getListDateTo(Long idPokoju) {
+        List<String> lista = new ArrayList<>();
+        for (PokojeRezerwacje pokojeRezerwacje : this.pokojeRezerwacjeRepository.findAll()) {
+            if (pokojeRezerwacje.getIdPokoju() == idPokoju) {
+                lista.add(pokojeRezerwacje.getDataDo());
+            }
+        }
+        return lista;
+    }
+    public List<String> getListDateFrom(Long idPokoju) {
+        List<String> lista = new ArrayList<>();
+        for (PokojeRezerwacje pokojeRezerwacje : this.pokojeRezerwacjeRepository.findAll()) {
+            if (pokojeRezerwacje.getIdPokoju() == idPokoju) {
+                lista.add(pokojeRezerwacje.getDataOd());
+            }
+        }
+        return lista;
     }
 }

@@ -57,7 +57,7 @@ public class DataBaseTest {
         this.klienciRepository.save(Klienci.builder().imie("Marek").nazwisko("Test").email("bbb@test.pl").telefon(111).nrDokumentu("333")._idTypDokumentu(idTypDokumentuPaszport).build());
 
         this.pokojeRepository.save(Pokoje.builder().numer(10).idTypPokoju(idTypPokojuDwojka).niedostepny(false).opis("Pokoj tesotwy 1").build());
-        this.pokojeRepository.save(Pokoje.builder().numer(20).idTypPokoju(idTypPokojuJedynka).niedostepny(true).opis("Pokoj tesotwy 2").build());
+        this.pokojeRepository.save(Pokoje.builder().numer(20).idTypPokoju(idTypPokojuJedynka).niedostepny(false).opis("Pokoj tesotwy 2").build());
 
         long idPokoj1 = this.pokojeRepository.findPokojeByNumer(10).getId();
         long idPokoj2 = this.pokojeRepository.findPokojeByNumer(20).getId();
@@ -74,8 +74,8 @@ public class DataBaseTest {
         long idMarekTest = this.klienciRepository.findKlienciByNrDokumentu("333").getId();
 
 
-        this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idJanKowalski).idPokoju(idPokoj1).dataOd("22.12.2017").dataDo("24.12.2017").build());
-        this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idMarekTest).idPokoju(idPokoj2).dataOd("12.07.2017").dataDo("22.07.2017").build());
+        this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idJanKowalski).idPokoju(idPokoj1).dataOd("2017-12-22").dataDo("2017-12-24").build());
+        this.pokojeRezerwacjeRepository.save(PokojeRezerwacje.builder().idKlienta(idMarekTest).idPokoju(idPokoj2).dataOd("2017-07-12").dataDo("2017-07-22").build());
     }
 
     public void printTestData() {

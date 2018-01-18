@@ -52,7 +52,7 @@ public class GalleryWindowController {
         int colIndex = 0;
         int rowIndex = 0;
         for (int i = 0; i <= listPhotos.size() - 1; i++) {
-            if (i % 2 == 0 && i != 0){
+            if (i % 2 == 0 && i != 0) {
                 rowConstraints = new RowConstraints(120.0);
                 this.gpGallery.getRowConstraints().add(rowConstraints);
                 rowIndex++;
@@ -61,12 +61,11 @@ public class GalleryWindowController {
             roomImage = new ImageView(image);
             roomImage.setFitHeight(100.0);
             roomImage.setFitWidth(100.0);
-            this.gpGallery.add(roomImage,colIndex,rowIndex);
+            this.gpGallery.add(roomImage, colIndex, rowIndex);
             colIndex++;
-            if (colIndex == 2){
+            if (colIndex == 2) {
                 colIndex = 0;
             }
-
-        }
         }
     }
+}

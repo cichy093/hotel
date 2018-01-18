@@ -5,4 +5,5 @@ import de.felixroske.jfxsupport.FXMLView;
 
 @FXMLView
 public class HelloView extends AbstractFxmlView {
+
 }

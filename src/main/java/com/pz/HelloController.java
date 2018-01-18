@@ -21,7 +21,7 @@ public class HelloController {
     public void handleButtonAction() {
         dbMeneger.loadTestData();
         HotelApplication.showView(MainWindowView.class);
-        mainWindowController.loadGrid();
+        mainWindowController.loadWindow();
     }
 
 
